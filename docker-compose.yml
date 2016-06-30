@@ -1,0 +1,56 @@
+version: "2"
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/sites-enabled:/etc/nginx/sites-enabled:ro
+      - ./php:/var/www/html:ro
+    links:
+      - php:php
+    ports:
+      - "80:80"
+      - "443:443"
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile-php
+    container_name: php
+    restart: unless-stopped
+    environment:
+      PHP_ENV: development
+      DB_NAME: wordpress
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_HOST: mysql
+    volumes:
+      - ./php:/var/www/html
+    links:
+      - mysql:mysql
+    ports:
+      - "9000:9000"
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+      - mysql-data:/var/lib/mysql
+    ports:
+    - "3306:3306"
+    restart: always
+
+volumes:
+  mysql-data:
+    driver: local
