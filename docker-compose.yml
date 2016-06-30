@@ -17,9 +17,7 @@ services:
       - "443:443"
 
   php:
-    build:
-      context: .
-      dockerfile: Dockerfile-php
+    image: groupeforum/php:7.0-fpm-alpine
     container_name: php
     restart: unless-stopped
     environment:
