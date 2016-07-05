@@ -1,6 +1,7 @@
 <?php
 /*
 Plugin Name: Ophelie
+Plugin URI: https://github.com/groupeforum/ophelie
 Description: Ophelie is a superwoman who will keep an eye on your WordPress.
 Version: 1.6.1
 Author: Florian Girardey

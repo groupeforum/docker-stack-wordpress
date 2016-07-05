@@ -9,6 +9,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
       - ./nginx/sites-enabled:/etc/nginx/sites-enabled:ro
+      - ./certificates:/etc/nginx/ssl/certificates:ro
       - ./php:/var/www/html:ro
     links:
       - php:php

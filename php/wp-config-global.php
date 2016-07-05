@@ -46,16 +46,16 @@ define( 'WP_DEBUG', true );
 define( 'DISALLOW_FILE_EDIT', true );
 
 /** WordPress Address */
-define( 'WP_SITEURL', 'http://' );
+define( 'WP_SITEURL', ( $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://' ) . $_SERVER['SERVER_NAME'] );
 
 /** Blog Address */
-define( 'WP_HOME', 'http://' . $_SERVER['SERVER_NAME'] );
+define( 'WP_HOME', ( $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://' ) . $_SERVER['SERVER_NAME'] );
 
 /** Path to the wp-content directory */
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content' );
 
 /** Url to the wp-content directory */
-define( 'WP_CONTENT_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/wp-content' );
+define( 'WP_CONTENT_URL', ( $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://' ) . $_SERVER['SERVER_NAME'] . '/wp-content' );
 
 /** Allow WordPress to use multisite */
 define( 'WP_ALLOW_MULTISITE', true );
