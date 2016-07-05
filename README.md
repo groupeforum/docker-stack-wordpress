@@ -14,7 +14,7 @@ This repository is an example of the following web stack.
 First you have to generate the self signed certificate. For that you just have to run `bash ./gen-self-signed-certificates.sh`.
 Then you have to link the `./certificates` folder with the nginx container.
 
-```
+```yaml
 nginx:
   image: nginx:alpine
   container_name: nginx
@@ -39,7 +39,7 @@ We are going to set everything with [Certbot](https://certbot.eff.org/), the [EF
 
 First you have to install the client:
 
-```
+```bash
 wget https://dl.eff.org/certbot-auto --directory-prefix=/usr/local/bin/
 chmod a+x /usr/local/bin/certbot-auto
 certbot-auto -h
@@ -47,19 +47,19 @@ certbot-auto -h
 
 Then you can install the certificate using that command:
 
-```
+```bash
 certbot certonly --webroot -w /home/sites/php/ -d www.example.com -d example.com
 ```
 
 Then you have to setup a CRON to renew the certificate.
 
-```
+```bash
 crontab -e
 ```
 
 And use the following CRON:
 
-```
+```bash
 # Check everyday @ 02:30 if the Let's Encrypt certificate is up-to-date
 # m  h  dom mon dow   command
   30 2  *   *   *     bash /home/sites/le-renew.sh
