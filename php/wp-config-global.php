@@ -57,20 +57,20 @@ define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content' );
 /** Url to the wp-content directory */
 define( 'WP_CONTENT_URL', ( $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://' ) . $_SERVER['SERVER_NAME'] . '/wp-content' );
 
-/** Allow WordPress to use multisite */
+/** Allow multisite */
 define( 'WP_ALLOW_MULTISITE', true );
-
-/** Enable proxy support and host for connecting */
-define( 'WP_PROXY_HOST', 'nginx' );
-
-/** Proxy port for connection. No default, must be defined */
-define( 'WP_PROXY_PORT', '80' );
 
 /** Increase PHP Memory Limit */
 define( 'WP_MEMORY_LIMIT', '128M' );
 
 /** Increase PHP Max Memory Limit */
 define( 'WP_MAX_MEMORY_LIMIT', '256M' );
+
+/** Disable WordPress built-in cron request */
+define( 'DISABLE_WP_CRON', true );
+
+/** Make sure a cron process cannot run more than once every 60 seconds. */
+define( 'WP_CRON_LOCK_TIMEOUT', 60 );
 
 if ( in_array( getenv( 'PHP_ENV' ), array( 'test', 'development' ) ) ) {
 	/** Do log PHP errors */

@@ -1,9 +1,8 @@
 <?php
 /*
 Plugin Name: Ophelie
-Plugin URI: https://github.com/groupeforum/ophelie
 Description: Ophelie is a superwoman who will keep an eye on your WordPress.
-Version: 1.6.1
+Version: 1.7.0
 Author: Florian Girardey
 Author URI: https://twitter.com/GIRARDEYFlorian
 License: GNU General Public License v2 or later
@@ -96,30 +95,3 @@ add_action( 'deactivate_wp-rocket/wp-rocket.php', 'rocket_clean_domain' );
  * @since 1.4.0
  */
 add_filter( 'automatic_updates_is_vcs_checkout', '__return_false', 1 );
-
-
-if ( ! function_exists( 'ophelie_force_http_send_through_proxy' ) ) {
-
-	/**
-	 * Force cURL request to pass through the proxy
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param null   $override Whether to override the request result. Default null.
-	 * @param string $uri      URL to check.
-	 * @param array  $check    Associative array result of parsing the URI.
-	 * @param array  $home     Associative array result of parsing the site URL.
-	 *
-	 * @return bool
-	 */
-	function ophelie_force_http_send_through_proxy( $override, $uri, $check, $home ) {
-		if ( defined( 'WP_PROXY_HOST' ) && defined( 'WP_PROXY_PORT' ) ) {
-			$override = isset( $home['host'] ) && ( strpos( $check['host'], $home['host'] ) !== false );
-		}
-
-		return $override;
-	}
-
-}
-
-add_filter( 'pre_http_send_through_proxy', 'ophelie_force_http_send_through_proxy', 10, 4 );

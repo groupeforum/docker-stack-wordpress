@@ -48,7 +48,7 @@ certbot-auto -h
 Then you can install the certificate using that command:
 
 ```bash
-certbot certonly --webroot -w /home/sites/php/ -d www.example.com -d example.com
+certbot-auto certonly --webroot -w /home/sites/php/ -d www.example.com -d example.com
 ```
 
 Then you have to setup a CRON to renew the certificate.
